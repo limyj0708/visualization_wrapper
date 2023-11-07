@@ -20,55 +20,53 @@ class CompareDistribution:
         ks_2samp_result = ks_2samp(data_1, data_2)
 
         hist_data = [data_2, data_1]
-        group_labels = list_dict_keys
+        group_labels = [list_dict_keys[1], list_dict_keys[0]]
 
         fig = ff.create_distplot(hist_data, group_labels, bin_size=bin_size, colors=['blue', 'red'], show_rug=False)
         fig.update_layout(
-            barmode='overlay'
+            barmode = "overlay"
             , title = {
-              "text" : f"""<b style="font-size:22;">{plot_title}</b><br><a style="font-size:14;">T-test, p-value : {round(ttest_result[1],4)}</a><br><a style="font-size:14;">KS_test, p_value : {round(ks_2samp_result[1],4)}</a>"""
-              , "pad" : {"t" : 40}
-              , "y" : 1
+              'text' : f"""<b style="font-size:22;">{plot_title}</b><br><a style="font-size:14;">T-test, p-value : {round(ttest_result[1],4)}</a><br><a style="font-size:14;">KS_test, p_value : {round(ks_2samp_result[1],4)}</a>"""
+              , 'pad' : {"t" : 40}
+              , 'y' : 1
             }
             , height = 750
             , width = 1000
-            , margin={"b":0}
+            , margin={'b':0}
             , legend = {
-                'font' : {
-                        'size' : 14
-                    }
-                } 
-            )
-        fig.update_traces(opacity=0.4)
-
-        fig2 = go.Figure()
-        fig2.add_trace(
-            go.Box(
-                  x = data_1
-                , y = [key_1] * len(data_1)
-                , name = key_1
-                , marker_color = 'red'
-            )
+                'font' : {'size' : 14}
+              , 'traceorder': "reversed"    
+            } 
         )
+        fig.update_traces(opacity=0.4)
+        
+        fig2 = go.Figure()
         fig2.add_trace(
             go.Box(
                   x = data_2
                 , y = [key_2] * len(data_2)
                 , name = key_2
-                , marker_color = 'blue'
+                , marker_color = "blue"           
             )
         )
-
+        fig2.add_trace(
+            go.Box(
+                  x = data_1
+                , y = [key_1] * len(data_1)
+                , name = key_1
+                , marker_color = "red"
+            )
+        )
         fig2.update_layout(
               height = 250
             , width = 1000
             , margin= {'t':30}
             , legend = {
-                'font' : {
-                        'size' : 14
-                }
+                  'font' : {'size' : 14}
+                , 'traceorder' : "reversed"
             } 
         )
-        fig2.update_traces(orientation='h')
+        fig2.update_traces(orientation = 'h')
+        
         fig.show()
         fig2.show()
