@@ -22,7 +22,7 @@ class CompareDistribution:
         hist_data = [data_1, data_2]
         group_labels = list_dict_keys
 
-        fig = ff.create_distplot(hist_data, group_labels, bin_size=bin_size, colors=['red', 'blue'])
+        fig = ff.create_distplot(hist_data, group_labels, bin_size=bin_size, colors=['red', 'blue'], show_rug=False)
         fig.update_layout(
             barmode='overlay'
             , title = {
@@ -44,18 +44,18 @@ class CompareDistribution:
         fig2 = go.Figure()
         fig2.add_trace(
             go.Box(
-                  x = data_1
-                , y = [key_1] * len(data_1)
-                , name = key_1
-                , marker_color = 'red'
-            )
-        )
-        fig2.add_trace(
-            go.Box(
                   x = data_2
                 , y = [key_2] * len(data_2)
                 , name = key_2
                 , marker_color = 'blue'
+            )
+        )
+        fig2.add_trace(
+            go.Box(
+                  x = data_1
+                , y = [key_1] * len(data_1)
+                , name = key_1
+                , marker_color = 'red'
             )
         )
 
