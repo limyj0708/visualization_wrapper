@@ -9,8 +9,10 @@ class CompareDistribution:
     
     def two_distribution_dist_box_Ttest_KStest(self, plot_title, bin_size):
         list_dict_keys = list(self.data_dict.keys())
-        data_1 = self.data_dict[list_dict_keys[0]]
-        data_2 = self.data_dict[list_dict_keys[1]]
+        key_1 = list_dict_keys[0]
+        key_2 = list_dict_keys[1]
+        data_1 = self.data_dict[key_1]
+        data_2 = self.data_dict[key_2]
         
         ttest_result = ttest_ind(data_1, data_2, equal_var=False)
         # equal_var : If True (default), perform a standard independent 2 sample test that assumes equal population variances.
@@ -36,18 +38,18 @@ class CompareDistribution:
         fig2 = go.Figure()
         fig2.add_trace(
             go.Box(
-                  x=data_1
-                , y=list_dict_keys[0] * len(data_1)
-                , name=list
-                , marker_color='red'
+                  x = data_1
+                , y = [key_1] * len(data_1)
+                , name = key_1
+                , marker_color = 'red'
             )
         )
         fig2.add_trace(
             go.Box(
-                  x=data_2
-                , y=list_dict_keys[1] * len(data_2)
-                , name=list
-                , marker_color='blue'
+                  x = data_2
+                , y = [key_2] * len(data_2)
+                , name = key_2
+                , marker_color = 'blue'
             )
         )
 
