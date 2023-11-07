@@ -6,12 +6,12 @@ from scipy.stats import ks_2samp, ttest_ind
 class CompareDistribution:
     def get_data(self, data_dict:dict):
         self.data_dict = data_dict
-        print(data_dict)
     
     def two_distribution_dist_box_Ttest_KStest(self, bin_size):
-        list_dict_keys = list(self.data.keys())
-        data_1 = self.data[list_dict_keys[0]]
-        data_2 = self.data[list_dict_keys[1]]
+        list_dict_keys = list(self.data_dict.keys())
+        data_1 = self.data_dict[list_dict_keys[0]]
+        data_2 = self.data_dict[list_dict_keys[1]]
+        
         ttest_result = ttest_ind(data_1, data_2, equal_bar=False)
         # equal_var : If True (default), perform a standard independent 2 sample test that assumes equal population variances.
         #             If False, perform Welch’s t-test, which does not assume equal population variance [2].
