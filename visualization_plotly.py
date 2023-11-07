@@ -7,12 +7,12 @@ class CompareDistribution:
     def get_data(self, data_dict:dict):
         self.data_dict = data_dict
     
-    def two_distribution_dist_box_Ttest_KStest(self, bin_size):
+    def two_distribution_dist_box_Ttest_KStest(self, plot_title, bin_size):
         list_dict_keys = list(self.data_dict.keys())
         data_1 = self.data_dict[list_dict_keys[0]]
         data_2 = self.data_dict[list_dict_keys[1]]
         
-        ttest_result = ttest_ind(data_1, data_2, equal_bar=False)
+        ttest_result = ttest_ind(data_1, data_2, equal_var=False)
         # equal_var : If True (default), perform a standard independent 2 sample test that assumes equal population variances.
         #             If False, perform Welch’s t-test, which does not assume equal population variance [2].
         ks_2samp_result = ks_2samp(data_1, data_2)
@@ -24,7 +24,7 @@ class CompareDistribution:
         fig.update_layout(
             barmode='overlay'
             , title = {
-              "text" : f"""<b style="font-size:22;"></b><br><a style="font-size:14;">T-test p-value : {round(ttest_result[1],4)}</a><br><a style="font-size:14;">{round(ks_2samp_result[1],4)}</a>"""
+              "text" : f"""<b style="font-size:22;">{plot_title}</b><br><a style="font-size:14;">T-test p-value : {round(ttest_result[1],4)}</a><br><a style="font-size:14;">{round(ks_2samp_result[1],4)}</a>"""
               , "pad" : {"t" : 40}
               , "y" : 1
             }
