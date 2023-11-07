@@ -26,15 +26,21 @@ class CompareDistribution:
         fig.update_layout(
             barmode='overlay'
             , title = {
-              "text" : f"""<b style="font-size:22;">{plot_title}</b><br><a style="font-size:14;">T-test p-value : {round(ttest_result[1],4)}</a><br><a style="font-size:14;">{round(ks_2samp_result[1],4)}</a>"""
+              "text" : f"""<b style="font-size:22;">{plot_title}</b><br><a style="font-size:14;">T-test, p-value : {round(ttest_result[1],4)}</a><br><a style="font-size:14;">KS_test, p_value : {round(ks_2samp_result[1],4)}</a>"""
               , "pad" : {"t" : 40}
               , "y" : 1
             }
-            , height = 800
+            , height = 750
             , width = 1000
-            , margin=dict(b=0)
+            , margin={"b":0}
+            , legend = {
+                'font' : {
+                        'size' : 14
+                    }
+                } 
             )
-        
+        fig.update_traces(opacity=0.4)
+
         fig2 = go.Figure()
         fig2.add_trace(
             go.Box(
@@ -54,7 +60,7 @@ class CompareDistribution:
         )
 
         fig2.update_layout(
-            height = 400
+              height = 250
             , width = 1000
             , margin= {'t':30}
             , legend = {
@@ -64,4 +70,5 @@ class CompareDistribution:
             } 
         )
         fig2.update_traces(orientation='h')
+        fig.show()
         fig2.show()
