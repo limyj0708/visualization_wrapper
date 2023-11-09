@@ -70,3 +70,52 @@ class CompareDistribution:
         
         fig.show()
         fig2.show()
+
+    def one_distribution_dist_box(self, plot_title, bin_size):
+            list_dict_keys = list(self.data_dict.keys())
+            key_1 = list_dict_keys[0]
+            data_1 = self.data_dict[key_1]
+
+            hist_data = [data_1]
+            group_labels = [list_dict_keys[0]]
+
+            fig = ff.create_distplot(hist_data, group_labels, bin_size=bin_size, colors=['blue', 'red'], show_rug=False)
+            fig.update_layout(
+                barmode = "overlay"
+                , title = {
+                'text' : f"""<b style="font-size:22;">{plot_title}</b>"""
+                , 'pad' : {"t" : 40}
+                , 'y' : 1
+                }
+                , height = 750
+                , width = 1000
+                , margin={'b':0}
+                , legend = {
+                    'font' : {'size' : 14}
+                , 'traceorder': "reversed"    
+                } 
+            )
+            fig.update_traces(opacity=0.4)
+            
+            fig2 = go.Figure()
+            fig2.add_trace(
+                go.Box(
+                    x = data_1
+                    , y = [key_1] * len(data_1)
+                    , name = key_1
+                    , marker_color = "red"
+                )
+            )
+            fig2.update_layout(
+                height = 250
+                , width = 1000
+                , margin= {'t':30}
+                , legend = {
+                    'font' : {'size' : 14}
+                    , 'traceorder' : "reversed"
+                } 
+            )
+            fig2.update_traces(orientation = 'h')
+            
+            fig.show()
+            fig2.show()
