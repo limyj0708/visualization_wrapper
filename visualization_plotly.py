@@ -79,7 +79,7 @@ class CompareDistribution:
             hist_data = [data_1]
             group_labels = [list_dict_keys[0]]
 
-            fig = ff.create_distplot(hist_data, group_labels, bin_size=bin_size, colors=['blue', 'red'], show_rug=False)
+            fig = ff.create_distplot(hist_data, group_labels, bin_size=bin_size, colors=['red'], show_rug=False)
             fig.update_layout(
                 barmode = "overlay"
                 , title = {
